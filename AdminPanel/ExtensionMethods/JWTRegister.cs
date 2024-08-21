@@ -1,4 +1,6 @@
 using System.Text;
+using AdminPanel.Services.Abstract;
+using AdminPanel.Services.Concrete;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -25,5 +27,8 @@ public static class JWTRegister
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:SecretKey"]!))
                 };
             });
+
+        Services.AddScoped<ITokenService, TokenService>();
+        Services.AddScoped<IAuthService, AuthService>();
     }
 }
