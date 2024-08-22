@@ -6,11 +6,11 @@ namespace AdminPanel.Controllers;
 
 [Route("api/[controller]")] 
 [ApiController]
-public class AuthController: ControllerBase
+public class AccountController: ControllerBase
 {
     private readonly IAuthService _authService;
 
-    public AuthController(IAuthService authService)
+    public AccountController(IAuthService authService)
     {
         _authService = authService;
     }
@@ -33,12 +33,13 @@ public class AuthController: ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
     {
         var (signInResult, token) = await _authService.Login(loginDto);
-
+    
         if (!signInResult.Succeeded)
         {
             return Unauthorized(new { Message = "Invalid username or password" });
         }
-
+    
         return Ok(new { Token = token, Message = "Login successful" });
     }
+    
 }
