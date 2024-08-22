@@ -1,5 +1,6 @@
 using AdminPanel.DTO.User;
 using AdminPanel.Services.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPanel.Controllers;
@@ -16,8 +17,9 @@ public class UserController: ControllerBase
         _userService = userService;
     }
 
-    [HttpGet("GetAllUsers")]
-    public async Task<IActionResult> GetAllUsersAsync()
+    [HttpGet("[action]")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> GetAllUsers()
     {
         var result = await _userService.GetAllUsersAsync();
         return Ok(result);

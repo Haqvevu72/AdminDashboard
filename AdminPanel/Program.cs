@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddJwtRegister(builder.Configuration);
 builder.Services.AddDbContextRegister(builder.Configuration);
 builder.Services.AddIdentityRegister();
+builder.Services.AddSwaggerRegister();
 
 var app = builder.Build();
 

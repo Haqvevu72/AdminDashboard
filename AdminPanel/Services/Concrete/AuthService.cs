@@ -41,7 +41,7 @@ public class AuthService: IAuthService
             return (SignInResult.Failed, null);
         }
 
-        var token = _tokenService.GenerateJwtToken(user);
+        var token = await _tokenService.GenerateJwtToken(user);
         return (SignInResult.Success, token);
     }
 
